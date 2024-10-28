@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Aroma</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        .black-bar {
+            height: 40px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .top-bar {
+            height: 70px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 40px;
+            width: 100%;
+            z-index: 1000;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            font-style: italic;
+        }
+        .menu-button {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            background-color: #000;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 20px;
+        }
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            width: 250px;
+            height: 100vh;
+            padding-top: 60px;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .nav-links.show {
+            display: block;
+            transform: translateX(0);
+        }
+        .nav-links a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+            transition: background-color 0.3s;
+            text-align: left;
+        }
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .video-container {
+            display: flex;
+            flex-direction: column; /* Disposición en columna */
+            align-items: center; /* Centrar horizontalmente */
+            margin-top: 100px; /* Espacio desde la parte superior */
+        }
+        .instructions-title {
+            font-size: 24px; /* Tamaño de letra para el título */
+            text-align: center; /* Centrar el texto */
+            margin-bottom: 10px; /* Espacio desde el título al video */
+            color: #000; /* Color del texto negro */
+            font-weight: bold; /* Hacer el texto más destacado */
+            margin-top: 40px; /* Espacio adicional desde la parte superior */
+        }
+        .description {
+            margin-top: 20px; /* Espacio desde el video a la descripción */
+            text-align: center; /* Centrar el texto de descripción */
+            font-size: 16px; /* Tamaño de letra para la descripción */
+            color: #333; /* Color de la descripción */
+            max-width: 600px; /* Ancho máximo de la descripción */
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('show'); // Alternar la clase "show" para mostrar/ocultar el menú
+        }
+    </script>
+</head>
+<body>
+    <div class="black-bar">
+        <div class="text">Productos de Alta Calidad</div>
+    </div>
+    <div class="top-bar">
+        <span class="title">Sweet Aroma</span>
+    </div>
+
+    <button class="menu-button" id="menuButton" onclick="toggleMenu()">☰</button> <!-- Botón para mostrar el menú -->
+    
+    <div class="nav-links" id="navLinks">
+        <a href="nuestros-productos.html">Nuestros Productos</a>
+        <a href="proceso_elaboracion.html">Proceso de Elaboración</a>
+        <a href="informacion_empresa.html">Información de la Empresa</a>
+        <a href="inicio.html">Inicio</a>
+        <a href="pregunta.html">?</a>
+    </div>
+
+    <!-- Título para instrucciones -->
+    <div class="video-container">
+        <div class="instructions-title">Cómo utilizar la página</div>
+
+        <!-- Contenedor para el video -->
+        <video width="600" controls>
+            <source src="tu_video.mp4" type="video/mp4">
+            Tu navegador no soporta la etiqueta de video.
+        </video>
+
+        <!-- Descripción debajo del video -->
+        <div class="description">
+            Este video te guiará a través de las funciones y características de nuestra página. Aprende cómo navegar, acceder a nuestros productos y aprovechar al máximo la experiencia de Sweet Aroma. ¡Disfruta!
+        </div>
+    </div>
+
+    <div class="catalog">
+        <!-- Aquí puedes añadir los elementos de tu catálogo -->
+        <!-- Puedes repetir el div.item para más productos -->
+    </div>
+    <div class="contact-container" style="background-color: #000; color: #fff; padding: 20px; text-align: center; margin-top: 20px;">
+        <h2>Contáctanos</h2>
+        <p>Síguenos en nuestras redes sociales:</p>
+        <div style="margin: 10px 0;">
+            <a href="https://studio.youtube.com/channel/UCKymvPNBp9g7m54ngAPhwqA/videos" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">YouTube (haz clic aquí)</a>
+            <a href="https://studio.facebook.com/channel/UCKymvPNBp9g7m54ngAPhwqA/videos" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">Facebook (haz clic aquí)</a>
+            <a href="https://www.instagram.com/your_instagram_handle/" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">Instagram (haz clic aquí)</a>
+            <a href="https://www.tiktok.com/@your_tiktok_handle" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">TikTok (haz clic aquí)</a>
+            <a href="https://wa.me/573222190532" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">WhatsApp: 3222190532 (haz clic aquí)</a>
+        </div>
+    </div>
+    
+</body>
+</html>

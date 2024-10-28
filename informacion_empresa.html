@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Aroma</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        .black-bar {
+            height: 40px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .bottom-bar {
+            height: 40px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .top-bar {
+            height: 70px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 40px;
+            width: 100%;
+            z-index: 1000;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            font-style: italic;
+        }
+        .menu-button {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            background-color: #000;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 20px;
+        }
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            width: 250px;
+            height: 100vh;
+            padding-top: 60px;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .nav-links.show {
+            display: block;
+            transform: translateX(0);
+        }
+        .nav-links a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+            transition: background-color 0.3s;
+            text-align: left;
+        }
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .pdf-container {
+            margin-top: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .pdf-box {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .pdf-box h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #333;
+        }
+        .pdf-box a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .pdf-box a:hover {
+            background-color: #0056b3;
+        }
+        .description {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="black-bar">
+        <div class="text">Productos de Alta Calidad</div>
+    </div>
+    <div class="top-bar">
+        <span class="title">Sweet Aroma</span>
+    </div>
+    
+    <!-- Botón para el menú -->
+    <button class="menu-button" id="menuButton" onclick="toggleMenu()">☰</button>
+    
+    <!-- Contenido del menú -->
+    <div class="nav-links" id="navLinks">
+        <a href="nuestros-productos.html">Nuestros Productos</a>
+        <a href="proceso_elaboracion.html">Proceso de Elaboración</a>
+        <a href="informacion_empresa.html">Información de la Empresa</a>
+        <a href="inicio.html">inicio</a>
+        <a href="pregunta.html">?</a>
+    </div>
+
+    <!-- Enlace de descarga del PDF en un cuadro -->
+    <div class="pdf-container">
+        <div class="pdf-box">
+            <h2>Presentación PDF</h2>
+            <a href="Grey minimalist business project presentation .pdf" download>Descargar PDF</a>
+        </div>
+        <div class="description">
+            Este formato explica claramente nuestro producto y la manera innovadora en la que Sweet Aroma se destaca. Desde su práctico envase en forma de esfero hasta su composición a base de aceites naturales, cada detalle está diseñado para brindar calidad, durabilidad y un toque único. ¡Descubre más en este documento y conoce el verdadero poder de una fragancia bien elaborada!
+        </div>
+    </div>
+
+    <div class="contact-container" style="background-color: #000; color: #fff; padding: 20px; text-align: center; margin-top: 20px;">
+        <h2>Contáctanos</h2>
+        <p>Síguenos en nuestras redes sociales:</p>
+        <div style="margin: 10px 0;">
+            <a href="https://studio.youtube.com/channel/UCKymvPNBp9g7m54ngAPhwqA/videos" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">YouTube (haz clic aquí)</a>
+            <a href="https://studio.facebook.com/channel/UCKymvPNBp9g7m54ngAPhwqA/videos" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">Facebook (haz clic aquí)</a>
+            <a href="https://www.instagram.com/your_instagram_handle/" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">Instagram (haz clic aquí)</a>
+            <a href="https://www.tiktok.com/@your_tiktok_handle" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">TikTok (haz clic aquí)</a>
+            <a href="https://wa.me/573222190532" 
+               style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">WhatsApp: 3222190532 (haz clic aquí)</a>
+        </div>
+    </div>
+    
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuButton = document.getElementById('menuButton');
+
+            if (navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+                menuButton.style.display = 'block';
+            } else {
+                navLinks.classList.add('show');
+                menuButton.style.display = 'none';
+            }
+        }
+        
+        document.addEventListener('click', (event) => {
+            const navLinks = document.getElementById('navLinks');
+            const menuButton = document.getElementById('menuButton');
+            const isClickInsideMenu = navLinks.contains(event.target) || menuButton.contains(event.target);
+            
+            if (!isClickInsideMenu && navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+                menuButton.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Aroma</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        .black-bar {
+            height: 40px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .bottom-bar {
+            height: 40px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .top-bar {
+            height: 70px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 40px;
+            width: 100%;
+            z-index: 1000;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000;
+            font-style: italic;
+        }
+        .menu-button {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            background-color: #000;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 20px;
+        }
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            width: 250px;
+            height: 100vh;
+            padding-top: 60px;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .nav-links.show {
+            display: block;
+            transform: translateX(0);
+        }
+        .nav-links a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+            transition: background-color 0.3s;
+            text-align: left;
+        }
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .pdf-container {
+            margin-top: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .pdf-box {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .pdf-box h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #333;
+        }
+        .pdf-box a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .pdf-box a:hover {
+            background-color: #0056b3;
+        }
+        .description {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        /* Estilo para las imágenes del catálogo */
+        .catalog {
+            display: flex; /* Disposición en fila */
+            justify-content: center; /* Centrar horizontalmente */
+            margin-top: 100px; /* Espacio desde la parte superior */
+        }
+        .item {
+            width: 10cm; /* Ancho de las imágenes (10 cm) */
+            height: 10cm; /* Altura de las imágenes (10 cm) */
+            border-radius: 5px; /* Bordes redondeados (opcional) */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil alrededor de las imágenes */
+            margin: 0 10px; /* Espacio lateral entre las imágenes */
+        }
+        .item img {
+            width: 100%; /* Ancho completo del contenedor */
+            height: 100%; /* Altura completa del contenedor */
+            object-fit: cover; /* Mantiene la proporción y cubre el cuadro */
+        }
+    </style>
+</head>
+<body>
+    <div class="black-bar">
+        <div class="text">Productos de Alta Calidad</div>
+    </div>
+    <div class="top-bar">
+        <span class="title">Sweet Aroma</span>
+    </div>
+
+    <!-- Botón para el menú -->
+    <button class="menu-button" id="menuButton" onclick="toggleMenu()">☰</button>
+
+    <!-- Contenido del menú -->
+    <div class="nav-links" id="navLinks">
+        <a href="nuestros-productos">Nuestros Productos</a>
+        <a href="proceso-de-elaboracion">Proceso de Elaboración</a>
+        <a href="informacion_empresa.html">Información de la Empresa</a>
+    </div>
+
+    <!-- Sección del catálogo de imágenes -->
+    <div class="catalog">
+        <div class="item">
+            <img src="file:///C:/Users/zapan/Downloads/index.html/IMG-20241012-WA0004.jpg" alt="Imagen 1">
+            <p>Descripción de la imagen 1</p>
+        </div>
+        <div class="item">
+            <img src="file:///C:/Users/zapan/Downloads/index.html/IMG-20241012-WA0004.jpg" alt="Imagen 2">
+            <p>Descripción de la imagen 2</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuButton = document.getElementById('menuButton');
+
+            if (navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+                menuButton.style.display = 'block';
+            } else {
+                navLinks.classList.add('show');
+                menuButton.style.display = 'none';
+            }
+        }
+        
+        document.addEventListener('click', (event) => {
+            const navLinks = document.getElementById('navLinks');
+            const menuButton = document.getElementById('menuButton');
+            const isClickInsideMenu = navLinks.contains(event.target) || menuButton.contains(event.target);
+            
+            if (!isClickInsideMenu && navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+                menuButton.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

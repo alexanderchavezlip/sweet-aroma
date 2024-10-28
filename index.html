@@ -1,0 +1,356 @@
+!<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Aroma</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Fondo blanco */
+            color: #000; /* Texto negro */
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+        }
+        .black-bar {
+            height: 40px;
+            background-color: #000; /* Color negro */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .top-bar {
+            height: 70px;
+            background-color: #ffffff; /* Fondo blanco */
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centrado del título */
+            position: fixed;
+            top: 40px;
+            width: 100%;
+            z-index: 1000;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #000; /* Color negro para el título */
+            font-style: italic; /* Cursivo para "Sweet Aroma" */
+        }
+        .menu-button {
+            position: fixed;
+            top: 50px; /* Debajo de la barra negra */
+            left: 10px; /* Margen desde la izquierda */
+            background-color: #000; /* Color negro */
+            color: #fff; /* Texto blanco */
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            z-index: 1001; /* Asegura que esté encima */
+            font-size: 20px; /* Tamaño del icono */
+        }
+        .nav-links {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            top: 0; /* Inicio en la parte superior */
+            left: 0; /* Desde la izquierda */
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semitransparente */
+            width: 250px; /* Ancho del menú */
+            height: 100vh; /* Altura completa */
+            padding-top: 60px; /* Espacio debajo de la barra superior */
+            z-index: 1000;
+            transition: transform 0.3s ease; /* Animación para la entrada */
+            transform: translateX(-100%); /* Inicia fuera de la pantalla */
+        }
+        .nav-links.show {
+            display: block; /* Muestra el menú */
+            transform: translateX(0); /* Mueve el menú a la vista */
+        }
+        .nav-links a {
+            display: block; /* Cada enlace ocupa una línea */
+            color: #fff; /* Color blanco */
+            text-decoration: none;
+            padding: 15px; /* Espaciado interno */
+            transition: background-color 0.3s;
+            text-align: left; /* Alinear texto a la izquierda */
+        }
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Fondo claro al pasar el mouse */
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 300px; /* Altura del video aumentada */
+            overflow: hidden;
+            margin-top: 110px; /* Para evitar que se superponga con la barra superior */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; /* Se asegura que el video esté en la parte superior */
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto; /* Asegura que el iframe reciba eventos de clics */
+        }
+        .scroll-section {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+            color: #000; /* Color de texto negro */
+            font-size: 18px;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        .scroll-section h1 {
+            margin-top: 0;
+        }
+        .large-box {
+            width: 450px;
+            height: 240px;
+            background-color: #f3f3f3; /* Fondo gris claro para el cuadro de imagen */
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra para el cuadro */
+        }
+        .large-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .large-box img.active {
+            opacity: 1;
+        }
+        .application-guide {
+            background-color: #eee; /* Color gris claro */
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .application-guide h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #333; /* Color oscuro para el título */
+        }
+        .recommendations {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9; /* Fondo gris claro */
+            border-radius: 8px;
+            text-align: center;
+            color: #333; /* Color oscuro para el texto */
+        }
+        .recommendations h2 {
+            margin: 0;
+            font-size: 24px; /* Tamaño de fuente para el título */
+            color: #000; /* Color negro para el título */
+        }
+        .allergic-problems {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9; /* Fondo gris claro */
+            border-radius: 8px;
+            text-align: center;
+            color: #333; /* Color oscuro para el texto */
+        }
+        .allergic-problems h2 {
+            margin: 0;
+            font-size: 24px; /* Tamaño de fuente para el título */
+            color: #000; /* Color negro para el título */
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #fff; /* Fondo blanco para el buscador */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 5px;
+            gap: 10px;
+            margin-left: 20px; /* Espacio a la izquierda del buscador */
+        }
+        .search-container input[type="text"] {
+            border: none;
+            padding: 5px;
+            outline: none;
+            font-size: 16px;
+        }
+        .search-container button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 20px;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="black-bar">
+        <div class="text">
+            Perfumes de Alta Calidad
+        </div>
+    </div>
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/rCLjIOyCW4k?loop=1&playlist=rCLjIOyCW4k&controls=1" frameborder="0" allow="fullscreen" allow="autoplay"></iframe>
+    </div>
+    <div class="top-bar">
+        <span class="title">Sweet Aroma</span>
+    </div>
+    
+    <button class="menu-button" id="menuButton" onclick="toggleMenu()">☰</button> <!-- Botón para mostrar el menú -->
+    
+    <div class="nav-links" id="navLinks">
+        <a href="#nuestros-productos">Nuestros Productos</a>
+        <a href="proceso_elaboracion.html">proceso de elaboracion
+            
+        </a>
+        
+        <a href="informacion_empresa.html">Información de la Empresa</a>
+    </div>
+    <a href="proceso_de_elaboracion_html">
+        
+    </a>
+    
+    <div class="scroll-section">
+        <div class="large-box">
+            <img src="IMG-20241012-WA0002.jpg" alt="Imagen 1" class="active">
+            <img src="IMG-20241012-WA0003.jpg" alt="Imagen 2">
+            <img src="IMG-20241012-WA0004.jpg" alt="Imagen 3">
+            <img src="IMG-20241012-WA0005.jpg" alt="Imagen 4">
+            <img src="IMG-20241012-WA0006.jpg" alt="Imagen 5">
+        </div>
+        <div class="application-guide">
+            <h2>nuestro producto</h2>
+            <p>nuesto producto es hecho de aceites naturales con los cuales cuidamos la piel.</p>
+        </div>
+    </div>
+    
+    <!-- Título "Cómo utilizar correctamente" -->
+    <h2 style="text-align: center; margin-top: 40px;">Cómo utilizar correctamente</h2>
+    
+    <!-- Primera imagen -->
+    <div style="text-align: center; margin-top: 20px;">
+        <img src="Captura de pantalla 2024-10-21 173704.png" alt="Cómo utilizar correctamente" style="max-width: 100%; height: auto; border: 2px solid #ccc; border-radius: 8px;">
+    </div>
+
+    <!-- Segunda imagen -->
+    <div style="text-align: center; margin-top: 20px;">
+        <img src="Captura de pantalla 2024-10-21 175923.png" alt="Segunda imagen" style="max-width: 100%; height: auto; border: 2px solid #ccc; border-radius: 8px;">
+    </div>
+
+    <!-- Título "Recomendaciones" -->
+    <div class="recommendations">
+        <h2>Recomendaciones</h2>
+        <p>Este producto, al ser de aceites, puede manchar la ropa; por tal motivo, es recomendable no rociar sobre la prenda que está utilizando. Como ya saben, nuestro producto es amigable con la piel.</p>
+    </div>
+
+    <!-- Título "Problemas Alergicos" -->
+    <div class="allergic-problems">
+        <h2>Problemas Alergicos</h2>
+        <p>Si observa algún efecto desfavorable en su piel, esto podría ser provocado por el limoneno, el linalol o por su pH. Si nota algún efecto adverso, descontinué el uso de nuestro producto de inmediato y contáctese con la empresa. Además, si al dejar de utilizarlo sigue la reacción, consulte a su médico.</p>
+    </div>
+    <div class="allergic-problems">
+        <h2>preguntas frecuentes</h2>
+        <p><h3>*¿Este producto es adecuado para todo tipo de piel?<h3>
+
+            <h3> nuestro producto es amigable con la piel, pero siempre es recomendable realizar una prueba en una pequeña área antes de usarlo.<h3>
+
+        <h1></h3>*¿Puedo usarlo durante el embarazo?<h3>
+            
+           <h3> Es mejor consultar a tu médico antes de usar cualquier producto durante el embarazo.</h3>
+            </p>
+    </div>
+    <div class="allergic-problems">
+        <h2>testimonios</h2>
+        <p><h3>"Me encanta el aroma, es tan fresco y duradero. Definitivamente lo volveré a comprar." - Ana M.<h3>
+            <h3>"He notado una gran diferencia en mi piel desde que empecé a usar este producto. ¡Es maravilloso!" - Luis R.<h3>
+            <h3>"El mejor perfume natural que he probado. ¡Lo recomiendo!" - Carla P.<h3>
+             </p>
+             <div class="contact-container" style="background-color: #000; color: #fff; padding: 20px; text-align: center; margin-top: 20px;">
+                <h2>Contáctanos</h2>
+                <p>Síguenos en nuestras redes sociales:</p>
+                <div style="margin: 10px 0;">
+                    <a href="https://studio.youtube.com/channel/UCKymvPNBp9g7m54ngAPhwqA/videos" 
+                       style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">YouTube (haz clic aquí)</a>
+                    <a href="https://studio.facebook.com/channel/UCKymvPNBp9g7m54ngAPhwqA/videos" 
+                       style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">Facebook (haz clic aquí)</a>
+                    <a href="https://www.instagram.com/your_instagram_handle/" 
+                       style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">Instagram (haz clic aquí)</a>
+                    <a href="https://www.tiktok.com/@your_tiktok_handle" 
+                       style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">TikTok (haz clic aquí)</a>
+                    <a href="https://wa.me/573222190532" 
+                       style="color: #fff; text-decoration: none; display: block; margin: 5px 0; cursor: pointer;">WhatsApp: 3222190532 (haz clic aquí)</a>
+                </div>
+            </div>
+            <div class="fixed-bar" style="background-color: #000; color: #fff; padding: 10px; text-align: center; position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;">
+                WhatsApp: <a href="https://wa.me/573222190532" style="color: #fff; text-decoration: underline;">3222190532</a> | Dirección: 45-21local:7#
+
+            </div>
+            
+            
+        
+
+    <script>
+        // Cambiar la imagen cada 3 segundos
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.large-box img');
+        
+        function changeImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        setInterval(changeImage, 3000); // Cambia la imagen cada 3 segundos
+
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuButton = document.getElementById('menuButton');
+
+            if (navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show'); // Oculta el menú
+                menuButton.style.display = 'block'; // Muestra el botón del menú
+            } else {
+                navLinks.classList.add('show'); // Muestra el menú
+                menuButton.style.display = 'none'; // Oculta el botón del menú
+            }
+        }
+        
+        // Cerrar el menú al hacer clic fuera de él
+        document.addEventListener('click', (event) => {
+            const navLinks = document.getElementById('navLinks');
+            const menuButton = document.getElementById('menuButton');
+            const isClickInsideMenu = navLinks.contains(event.target) || menuButton.contains(event.target);
+            
+            if (!isClickInsideMenu && navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show'); // Oculta el menú
+                menuButton.style.display = 'block'; // Muestra el botón del menú
+                
+                
+            }
+        });
+        
+    </script>
+</body>
+</html> 
